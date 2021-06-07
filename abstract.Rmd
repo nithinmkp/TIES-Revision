@@ -1,0 +1,15 @@
+---
+title: "Abstract"
+documentclass: article
+output: 
+  bookdown::pdf_document2:
+    number_sections: yes 
+    fig_caption: yes        
+    includes:
+      in_header: "preamble.tex"
+papersize: a4
+---
+
+Rising food prices have always been a cause of worry in India. Such episodes of rising food prices have always created a large hue and cry among the masses which has stimulated extensive political and academic discussions on causes and their implications. With the need to design policies to contain food inflation, numerous studies have examined the determinants of food prices. Oil prices have been traditionally thought of as one of the key determinants of food prices in India. Though the relationship between food and oil prices has been well established in the literature with symmetric relationships, this study employs the NARDL approach to examine the potential asymmetries in oil price pass-through to food prices. The study finds the presence of significant asymmetry in oil prices pass-through to food prices in long run. This study also finds that this asymmetry, however, is not significant in the short run. The study has important policy implications regarding oil price pass-through and market power.
+
+***Keywords:*** Food Inflation, Oil Price pass-through, Asymmetric cointegration, NARDL

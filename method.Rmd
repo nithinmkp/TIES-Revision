@@ -1,0 +1,45 @@
+---
+title: "Method"
+documentclass: article
+output: 
+  bookdown::pdf_document2:
+    number_sections: yes 
+    fig_caption: yes        
+    includes:
+      in_header: "preamble.tex"
+papersize: a4
+---
+
+# Data and Methodology {#sec3}
+
+This study employs monthly data from 2012 April to 2019 March. The food price is measured by the newly introduced WPI based Food Index with the base year 2011-12. Oil price is measured using West Texas Intermediate crude oil price in both US dollar (USD) and Indian rupees (INR). The price of oil in Indian rupees is calculated by multiplying the US dollar price by the exchange rate in the corresponding month.\begin{align*}
+OP_{rs}=OP_{dol} \times er
+\end{align*}
+
+where $OP_{rs}$ refers to oil price in Indian rupees, $OP_{dol}$ is the price of oil in the US dollar and refers to the exchange rate of vis-à-vis the US dollar. All the data is sourced from the RBI database on the Indian economy and Federal Reserve Bank of St. Louis (FRED). Oil price and food price have a strong impact on other macroeconomic variables. These variables exhibit a strong trend which makes them non-stationary. The standard methods of dealing with series that are non-stationary and exhibit relationships among them are the method of cointegration, error correction, and Granger causality. While these techniques enable in analyzing the long-run and short-run relationship among the variables, they presume asymmetrical relationship between them. The presence of asymmetry makes these models incapable of capturing potential asymmetric relationships that may exist between these variables. Following @shin2014 we employ the Non-Linear Autoregressive Distributed Lag Model (NARDL) approach to cointegration to capture this asymmetric relationship between oil price and food price in India. The NARDL approach is an asymmetric extension to the more popular ARDL model of @pesaran1998 and @pesaran2001. Following @shin2014, we specify the long-run equation of food price as below: \begin{equation}
+fp_t=\alpha_0+\alpha_1 OP_t^++\alpha_2 OP_t^-+\epsilon_t
+(\#eq:eq1)
+\end{equation}
+
+Where $fp_t$ refers to the food price at time t and $OP_t$ refers to the oil price at time t and $\alpha=[\alpha_0,\alpha_1,\alpha_2]$ is the vector of long-run parameters to be estimated. Also, $OP_t^+$ and $OP_t^-$ are partial sums of positive and negative changes to oil price. We decompose partial sums as follows
+
+```{=tex}
+\begin{subequations}
+    \begin{align}
+        OP_t^+ = \sum_{i=1}^{t}\Delta OP_t^+ =\sum_{i=1}^{t}max(\Delta OP_t^+) (\#eq:eq2a) \\
+        OP_t^- = \sum_{i=1}^{t}\Delta OP_t^- =\sum_{i=1}^{t}max(\Delta OP_t^-) (\#eq:eq2b)
+    \end{align}
+\end{subequations}
+```
+$\alpha_1$ captures the long-run relationship between food and oil price increase at time t while $\alpha_2$ indicates the long-run relationship between food and oil price reduction. Both these coefficients are expected to be positive. Based on theory and existing literature, we also expect that oil price increase will result in an increase in food prices at a greater magnitude than the corresponding reduction in food prices with reduction of oil prices in the long-run implying $\alpha_1 > \alpha_2$. This results in the long-run asymmetry of oil price pass through to food prices.
+
+As illustrated by @shin2014, the concept of partial asymmetry can be incorporated into the popular ARDL framework of @pesaran1998 and @pesaran2001 to formulate an asymmetric error correction model as:
+\begin{equation} \label{eq:eq3}
+	\Delta fp_t=\alpha+\sum_{i=1}^{n}\beta_ifp_{t-i}+\delta_1OP_{t-1}^++\delta_2OP_{t-1}^-+\sum_{j=1}^{p}\gamma_j \Delta fp_{t-j}+\sum_{k=1}^{q}\left(\theta_k^+ \Delta OP_{t-1}^++\theta_k^+ \Delta OP_{t-1}^-\right)
+\end{equation}
+	Where n,p and q represent lag orders and $\alpha_i = - \frac{\delta_i}{1-\sum_{j=1}^{n}\beta_j}$ measures the long-run impacts of oil price increase and decrease on the food price. Similarly,  $\sum_{i=0}^{s}\theta_i^+$ and $\sum_{i=0}^{s}\theta_i^-$  measures the short-run influence of oil price increase and oil price decrease on food prices respectively.  
+	
+There are few caveats to adhere to for empirical implementation of NARDL models. First is to ensure that none of the variables are integrated of order two. While NARDL models can be used for both I(0) and I(1) variables, it cannot be used for I(2) variables. The study uses popular ADF and PP tests for determining the order of integration of the variables. After ensuring that the variables are of order I(0) or I(1) we proceed to estimate \@ref(eq:eq3) using standard OLS technique. Following Katrakilidis and Trachanas (2012), a general to specific approach is adopted to arrive at the optimal lag specification of NARDL model. Following @pesaran2001 and @shin2014, we employ bounds testing to test for cointegration among the variables which involves  Wald F test of the null hypothesis of no co-integration among the variables. With the evidence for co-integration among the variables, we derive the asymmetric long-run coefficients and make inferences. We also derive the asymmetric dynamic multipliers of 1\% change in $OP_i^+$  and $OP_i^-$ respectively as: \begin{equation}
+			mh^+= \sum_{j=0}^{p}\frac{\partial y_{t+j}}{\partial OP_{t-1^+}} \; \; \;  mh^-= \sum_{j=0}^{p}\frac{\partial y_{t+j}}{\partial OP_{t-1}^-}
+\end{equation}
+as h $\rightarrow \infty$, $m_h^+ \rightarrow \alpha_1$ and $m_h^- \rightarrow \alpha_2$.

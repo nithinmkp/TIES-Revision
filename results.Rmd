@@ -1,0 +1,186 @@
+---
+title: "Method"
+documentclass: article
+output: 
+  bookdown::pdf_document2:
+    number_sections: yes 
+    fig_caption: yes        
+    includes:
+      in_header: "preamble.tex"
+papersize: a4
+---
+
+# Results and Discussion {#sec4}
+Before we undertake analysis, we plot these variables to understand how they behave over time. It will also help in providing some idea about the potential relationship between these variables. The figures are given below
+```{r trend, echo=FALSE,fig.align='center',fig.height=1.75,fig.width=1.75,out.width="85%",fig.cap="Food Prices and Oil Prices in India"}
+include_graphics(here("Figures","new_trend.jpg"))
+```
+From the figures, it can be inferred that variables exhibit strong trends and are non-stationary. It is also observed that food price and oil price tend to move together in case of a price rise or a price fall. Since non-stationary time series are subject to the problem of spurious regression, we proceed to check the order of integration of these variables employing the popular ADF (Augmented Dickey-Fuller) and PP (Philips-Perron) unit root tests. This is a pre-requisite given the requirements of the bounds testing approach that none of the variables are integrated of order two.The results of these tests are given in Table-\@ref(tab:tab1)
+\begin{table}[h] 
+	\large
+	\begin{threeparttable}
+			\resizebox{1.1\textwidth}{!}{%
+		\begin{tabular}{ccccccccc}
+			\hline
+			\multirow{3}{*}{Variables} & \multicolumn{4}{c}{Level}                        & \multicolumn{4}{c}{First Difference}             \\ \cline{2-9} 
+			& \multicolumn{2}{c}{ADF} & \multicolumn{2}{c}{PP} & \multicolumn{2}{c}{ADF} & \multicolumn{2}{c}{PP} \\
+			& Intercept & Trend and Intercept & Intercept & Trend and Intercept & Intercept & Trend and Intercept & Intercept & Trend and Intercept \\ \cline{2-9} 
+		Food price $\left(fp\right)$	& -1.806     & -3.435*    & -1.744     & -2.52     & -4.667***  & -4.694***  & -4.707***  & -4.739*** \\
+		Oil Price in Dollar $\left(OP_{dol}\right)$	& -2.736*    & -2.8333    & -2.392     & -2.449    & -7.572***  & -7.606***  & -7.524***  & -7.606*** \\
+		Oil Price in Rupees $\left(OP_{rs}\right)$	& -2.689*    & -2.558     & -2.299     & -2.166    & -7.778***  & -7.804***  & -7.857***  & -7.884*** \\ \hline
+		\end{tabular}%
+	}
+\end{threeparttable}
+\begin{tablenotes}
+	\tiny
+	\item *,** and*** denotes significance ate 10\%, 5\% and 1\% respectively. AIC (Akaike Information Criteria) was used to choose the optimum lag structure.
+\end{tablenotes}
+\caption{Unit-root tests}
+\label{tab:tab1}
+\end{table}
+
+The results of both the test indicate that none of the variables are integrated of the order two thus fulfilling the requirements for bounds testing procedure. Accordingly, we proceed to estimate equation \@ref(eq:eq3).The lag structure is chosen based on AIC criteria and is well in accordance with theory.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{table}[h]\label{tab:tab2}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{cccc}
+			\hline
+			Model   & Dependent Variable & Independent Variables & Lag Selection \\ \hline
+			Model 1 &     $fp$               &    $OP_{dol}^+,OP_{dol}^-$                   &  (2,2,2)             \\
+			Model 2 &   $ln\_fp$                 &  $ln\_OP_{dol}^+,ln\_OP_{dol}^-$                     &  (2,2,2)              \\
+			Model 3 &     $fp$               &      $OP_{rs}^+,OP_{rs}^-$                 &  (2,2,2)             \\
+			Model 4 &       $ln\_fp$              &  $ln\_OP_{rs}^+,ln\_OP_{rs}^-$                     &  (2,2,2)             \\ \hline
+		\end{tabular}%
+	}
+\caption{Estimated NARDL Models}
+\end{table}
+
+Once the model is estimated, we proceed for bounds testing to establish cointegration among the variables. To this end, we use critical values given by @narayan2005 instead of the critical values given by @pesaran2001 because of the sample size. The results of bounds testing of the two models and associated critical values are given in the table that follows
+```{=tex}
+\begin{table}[H]
+	\begin{threeparttable}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{ccccc}
+				\hline
+				Model   & F-Statistic & 95\% Lower Bound       & 95\% Upper Bound       & Conclusion       \\ \hline
+				Model 1 & 4.3797      & \multirow{4}{*}{3.288} & \multirow{4}{*}{4.070} & Cointegration    \\
+				Model 2 & 2.2353      &                        &                        & No Cointegration \\
+				Model 3 & 5.2265      &                        &                        & Cointegration    \\
+				Model 4 & 2.8177      &                        &                        & No Cointegration \\ \hline
+			\end{tabular}%
+		}
+	\end{threeparttable}
+\begin{tablenotes}
+	\tiny
+	\item Critical values are from Narayan(2005), K=2, n= 58
+	
+\end{tablenotes}
+	
+	\caption{Bounds test for Cointegration}
+	\label{tab:tab3}
+	
+\end{table}
+```
+From the bounds test resulted presented above, we conclude that food price and oil price co-move or associated in the long run in both the models. Thus we infer that food price and oil price have an asymmetric relationship between them in the long run. We proceed to assess the dynamics of food price and positive and negative changes in oil price. 
+
+The estimated results of estimation of equation \@ref(eq:eq3) are presented in Table- \@ref(tab:tab4) . These results enable us to analyse the short-run and long-run asymmetry between food price and oil price both in terms of dollars and rupees. 
+
+The estimates from Table-\@ref(tab:asym) suggest that long-run coefficients of oil price are positive and significant which is as expected.The estimates suggest that an increase in the price of oil by one dollar will result in an increase in food prices by 0.387 rupees while the increase in the price of oil by hundred rupees will increase the price of food by rupees 0.05 only. Our results of estimates of oil price increase are similar to @bafes2007 and @Ibrahim2015a . These results make sense The relatively higher pass-through of oil price in dollar to food as compared to the oil price in the rupees to food may be due to the depreciation of exchange rate in recent times and also in 2013 @Ibrahim2015a. It is also noted that coefficient of oil price fall is smaller in both the equations though significant. The results indicate that a one dollar decrease in oil price will result only in a fall of food by 0.08 rupees while a hundred rupee fall in oil price will result in almost no decline of food prices. These results indicate a clear asymmetry in oil price pass through to food prices. Our results, are in accordance with earlier similar studies where the coefficient of oil price fall was found to be insignificant [@Ibrahim2015a.]. 
+
+Though the low oil price pass-through of an oil price increase found in our estimates is relieving, the even lower oil price pass-through of oil price decrease is a cause for concern. Thus a decrease in oil price may not result in correction of food prices even in the long run and prices would linger around.
+```{=tex}
+\FloatBarrier
+\begin{table}[H]
+	\centering
+	\renewcommand{\arraystretch}{1.23}
+	
+		
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\begin{tabular}{l*{2}{c}}
+			\hline
+			&\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
+			&\multicolumn{1}{c}{Model 1}&\multicolumn{1}{c}{Model 3}\\
+			\hline
+			ECT         &     -0.2720\sym{**} &     -0.3206\sym{***}\\
+			&     (-3.45)         &     (-3.78)         \\
+			$OP^+(-1)$      &      0.1053\sym{*}  &      0.0016\sym{**} \\
+			&      (2.56)         &      (2.89)         \\
+			$OP^-(-1)$      &      0.0182         &      0.0002         \\
+			&      (1.34)         &      (1.23)         \\
+			$\Delta fp(-1)$       &      0.4933\sym{***}&      0.4944\sym{***}\\
+			&      (4.26)         &      (4.24)         \\
+			$\Delta OP^+$      &      0.0630         &      0.0014         \\
+			&      (0.72)         &      (1.21)         \\
+			$\Delta OP^+(-1)$     &      0.1152         &      0.0014         \\
+			&      (1.38)         &      (1.22)         \\
+			$\Delta OP^-$       &     -0.0591         &     -0.0011         \\
+			&     (-0.93)         &     (-1.11)         \\
+			$\Delta OP^-(-1)$     &      0.0100         &      0.0003         \\
+			&      (0.15)         &      (0.31)         \\
+			Constant      &     29.6254\sym{***}&     34.9871\sym{***}\\
+			&      (3.50)         &      (3.83)         \\
+			\hline
+			\(N\)       &          58         &          58         \\
+			R-Square    &      0.4504         &      0.4725         \\
+			Adj.R-Square&      0.3606         &      0.3864         \\
+			AIC         &    205.0771         &    202.6902         \\
+			\hline\hline
+			\multicolumn{3}{c}{Model Diagnostics} \\
+			
+			Portmanteau test			& 23.15 (0.67) &  27.69 (0.42)\\
+			Breusch/Pagan heteroskedasticity test (chi2) & 0.3426 (0.5583)  & 0.2416 (0.62)  \\
+			Ramsey RESET test (F)               &             0.3428 (0.7945)  & 1.458   (0.2383)   \\
+			Jarque-Bera test on normality (chi2)   &          1.063 (0.5878)   &  1.444  (0.4858)  \\
+			\hline\hline
+			\multicolumn{3}{l}{\footnotesize \textit{t} statistics in parentheses} \\
+			\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+			\multicolumn{3}{l}{\footnotesize For Diagnostic panel, values in parenthesis represent p-values} \\
+		\end{tabular}
+		
+
+	
+	
+	\caption{Nonlinier ARDL model estimation results}
+	\label{tab:tab4}
+\end{table}
+\FloatBarrier
+```
+
+```{=tex}
+\FloatBarrier
+\renewcommand{\arraystretch}{2.3}
+\FloatBarrier
+\begin{table}[H]
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccccccccc}
+			\hline
+			\multirow{2}{*}{Exogenous Variable} &
+			\multicolumn{2}{c}{Long-run effect {[}+{]}} &
+			\multicolumn{2}{c}{Long-run effect {[}-{]}} &
+			\multicolumn{2}{c}{Long-run Assymetry} &
+			\multicolumn{2}{c}{Short-run Assymetry} \\
+			& Coefficient & P \textgreater F & Coefficient & P \textgreater F & F & P \textgreater F & F & P \textgreater F \\ \hline
+			$OP_{dol}$&   0.387            &    0.000               &  -0.067           &   0.133                &   59.06  &    0.000               &   2.432 &           0.125        \\
+			$OP_{rs}$&   0.005            &    0.000               &  -0.001           &   0.176                &  123.1  &    0.000               &   1.658 &           0.204        \\ \hline
+		\end{tabular}%
+	}
+	\caption{Assymetric Statistics}
+	\label{tab:asym}
+\end{table}
+\FloatBarrier
+```
+ 
+
+The results of short-run estimates are presented in  Table-\@ref(tab:tab4).  From the table, it can be observed that the immediate short run coefficients of both price rise and price fall of oil are insignificant in both the equations which rules out the presence of short-run asymmetry which is surprising. One possible reason for this can be price stickiness .Tripathi and Goyal (2011) estimates that it takes around one year for Indian markets  to change prices. 
+
+The dynamic multipliers of a 1% change in oil price rise and 1% fall in oil price is also derived. The figures are given below
+```{r dyn-mult, echo=FALSE,fig.align='center',fig.height=1.75,fig.width=1.75,out.width="100%",fig.cap="Dynamic Multipliers of Oil Price Rise and Oil Price Fall"}
+include_graphics(here("Figures","Assym_collage.jpg"))
+```
+Finally, we undertake diagnostic checking for the estimated models. It is observed from the Table-\@ref(tab:tab4) that both models are free from autocorrelation problem upto four lags. The models are also free from ARCH effects upto four lags while the errors in residuals of both the models are normally distributed as indicated by the J-B statistic. Both the models have reasonably high $R^2$ value as well. We also perform the CUSUM and CUSUM squares test to ensure the stability of parameters of both the estimated model. The figures given below indicate that parameters of both the models are stable at 5 percent significance.
+
+```{r cusum, echo=FALSE,fig.align='center',fig.height=1.75,fig.width=1.75,out.width="100%",fig.cap="CUSUM and CUSUM-Square plots",fig.subcap=c('Model 1', 'Model 3'),fig.ncol=1}
+include_graphics(here("Figures","cusum_collage.jpg"))
+include_graphics(here("Figures","cusum2_collage.jpg"))
+```

@@ -1,0 +1,48 @@
+---
+title: "Assymetric Impact of Oil Prices on Food Prices in India: Evidence From NARDL Approach"
+author:
+   - Mohammed Shameem P^[Corresponding Author,School of Economics,University of Hyderabad, mohammedshameemp@gmail.com]
+   - Nithin M^[Department of HSS, Indian Institute of Technology-Kharagpur, write2nithinm@iitkgp.ac.in]
+documentclass: article
+output: 
+  bookdown::pdf_document2:
+    keep_tex: true
+    extra_dependencies: "subfig"
+    number_sections: true
+    toc: false
+    citation_package: natbib 
+    fig_caption: yes 
+    latex_engine: lualatex      
+    includes:
+      in_header: "preamble.tex"
+papersize: a4
+fontsize: 12pt
+bibliography: ["ties.bib"]
+biblio-style: apa
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.pos = 'H')
+library(here)
+library(knitr)
+```
+
+
+\begin{center}
+
+\large{\textbf{Abstract}}
+
+\end{center}
+```{r child = 'abstract.Rmd'}
+```
+```{r child = 'intro.Rmd'}
+```
+```{r child = 'review.Rmd'}
+```
+```{r child = 'method.Rmd'}
+```
+```{r child = 'results.Rmd'}
+```
+```{r child = 'conclusion.Rmd'}
+```

@@ -170,7 +170,7 @@ mod3<-nardl(ln_food~ln_oil_rs,master_DT,ic="aic",graph = T,case=3)
 summary(mod3)
 mod4<-nardl(food~oil_rs,master_DT,ic="aic",graph = T,case=3)
 summary(mod4)
-
+  
 plotmplier(mod1,mod1$nl,1,10)
 matser_dt2$Date<-as.Date.character(matser_dt2$Date)
 write.xlsx(matser_dt2,"Data_est.xlsx")
